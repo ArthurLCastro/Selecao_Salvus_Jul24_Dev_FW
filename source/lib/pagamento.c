@@ -2,11 +2,12 @@
 #include <string.h>
 
 
-InfoMensalPorFuncionario cadastrar_info_mensal_clt(char nome_do_funcionario[], float salario_fixo_mensal, int qtd_de_contratos) {
+InfoMensalPorFuncionario cadastrar_info_mensal_clt(char nome_do_funcionario[], float salario_fixo_mensal, int qtd_de_contratos, float bonus_por_contrato) {
     InfoMensalPorFuncionario registro;
 
     strcpy(registro.nome_do_funcionario, nome_do_funcionario);
     registro.qtd_de_contratos = qtd_de_contratos;
+    registro.bonus_por_contrato = bonus_por_contrato;
 
     // Dados especificos para funcionario celetista
     registro.tipo_de_vinculo = clt;
@@ -15,16 +16,17 @@ InfoMensalPorFuncionario cadastrar_info_mensal_clt(char nome_do_funcionario[], f
     return registro;
 }
 
-InfoMensalPorFuncionario cadastrar_info_mensal_terceirizado(char nome_do_funcionario[], float valor_por_hora_trabalhada, float horas_trabalhadas_no_mes, int qtd_de_contratos) {
+InfoMensalPorFuncionario cadastrar_info_mensal_terceirizado(char nome_do_funcionario[], float taxa_por_hora, float horas_trabalhadas, int qtd_de_contratos, float bonus_por_contrato) {
     InfoMensalPorFuncionario registro;
 
     strcpy(registro.nome_do_funcionario, nome_do_funcionario);
     registro.qtd_de_contratos = qtd_de_contratos;
+    registro.bonus_por_contrato = bonus_por_contrato;
 
     // Dados especificos para funcionario terceirizado
     registro.tipo_de_vinculo = terceirizacao;
-    registro.dados_do_vinculo.terceirizado.valor_por_hora_trabalhada = valor_por_hora_trabalhada;
-    registro.dados_do_vinculo.terceirizado.horas_trabalhadas_no_mes = horas_trabalhadas_no_mes;
+    registro.dados_do_vinculo.terceirizado.taxa_por_hora = taxa_por_hora;
+    registro.dados_do_vinculo.terceirizado.horas_trabalhadas = horas_trabalhadas;
 
     return registro;
 }
@@ -40,8 +42,8 @@ void imprimir_info_mensal(InfoMensalPorFuncionario registro) {
     } else if (registro.tipo_de_vinculo == terceirizacao) {
         printf("Terceirizado\n");
 
-        printf("\tValor por hora trabalhada: R$ %.2f\n", registro.dados_do_vinculo.terceirizado.valor_por_hora_trabalhada);
-        printf("\tHoras trabalhadas no m\x88s: %.2f h\n", registro.dados_do_vinculo.terceirizado.horas_trabalhadas_no_mes);
+        printf("\tValor por hora trabalhada: R$ %.2f\n", registro.dados_do_vinculo.terceirizado.taxa_por_hora);
+        printf("\tHoras trabalhadas no m\x88s: %.2f h\n", registro.dados_do_vinculo.terceirizado.horas_trabalhadas);
     } else {
         printf("\t[Erro] Tipo de contrata\x87\xc6o inv\xA0lida!\n");
     }
@@ -55,10 +57,10 @@ float calcular_pagamento_individual(InfoMensalPorFuncionario registro) {
     if (registro.tipo_de_vinculo == clt) {
         pagamento_base = registro.dados_do_vinculo.celetista.salario_fixo_mensal;
     } else if (registro.tipo_de_vinculo == terceirizacao) {
-        pagamento_base = registro.dados_do_vinculo.terceirizado.valor_por_hora_trabalhada * registro.dados_do_vinculo.terceirizado.horas_trabalhadas_no_mes;
+        pagamento_base = registro.dados_do_vinculo.terceirizado.taxa_por_hora * registro.dados_do_vinculo.terceirizado.horas_trabalhadas;
     }
 
-    bonus = registro.qtd_de_contratos * BONUS_FIXO_EM_REAIS;
+    bonus = registro.qtd_de_contratos * registro.bonus_por_contrato;
 
     return pagamento_base + bonus;
 }

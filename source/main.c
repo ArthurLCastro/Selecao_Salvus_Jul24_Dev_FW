@@ -10,14 +10,18 @@
 #include "lib/pagamento.c"
 
 
+// --------------- Macros ---------------
+#define BONUS_FIXO_EM_REAIS     200.00      // Considerando um valor de comissao por contrato igual para todos os funcionarios
+
+
 // --------------- Funcao principal ---------------
 int main(void) {
 
     // 1) Cadastrando as informacoes do mes para cada funcionario:
     InfoMensalPorFuncionario registros[] = {
-        cadastrar_info_mensal_terceirizado("Joao", 50.00, 100.0, 0),
-        cadastrar_info_mensal_clt("Marcela", 3000.00, 10),
-        cadastrar_info_mensal_terceirizado("Joaquim", 30.00, 180.0, 12),
+        cadastrar_info_mensal_terceirizado("Joao", 50.00, 100.0, 0, BONUS_FIXO_EM_REAIS),
+        cadastrar_info_mensal_clt("Marcela", 3000.00, 10, BONUS_FIXO_EM_REAIS),
+        cadastrar_info_mensal_terceirizado("Joaquim", 30.00, 180.0, 12, BONUS_FIXO_EM_REAIS),
         // ... Registros de outros funcionarios podem ser cadastrados aqui
     };
 
