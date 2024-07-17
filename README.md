@@ -4,17 +4,20 @@
 ## Conteúdos:
 
 - [Descrição](#descrição)
-- [Questão Proposta](#questão-proposta)
+- [Questão proposta](#questão-proposta)
     - [Objetivo](#objetivo)
     - [Observação](#observação)
     - [Informações adicionais](#informações-adicionais)
 - [Resolução](#resolução)
+- [Pré-requisitos](#pré-requisitos)
+    - [Para Linux](#para-linux)
+    - [Para Windows](#para-windows)
 
 ## Descrição:
 
 Este repositório contém os arquivos referentes a solução do teste técnico da 2ª etapa do processo seletivo da [Salvus](https://www.salvus.me/).
 
-## Questão Proposta:
+## Questão proposta:
 
 A empresa SmartWork trabalha com múltiplos tipos de profissionais diferentes. No momento, eles podem aderir a um e apenas um dos seguintes tipos de contrato:
 
@@ -71,3 +74,19 @@ De atenção à manutenção do código, evite código e dados duplicados e redu
 O código fonte com a resolução da [Questão Proposta](#questão-proposta) encontra-se em [`/source`](/source/), tendo como arquivo principal [`main.c`](/source/main.c).
 
 A estratégia de resolução utilizada consistiu na implementação de uma estrutura de dados chamada `FolhaDePagamentoIndividual`, que armazena as informações mensais de um funcionário em conjunto com uma outra estrutura, nomeada como `Item`, que equivale a um nó de uma lista encadeada. Foi desenvolvido um grupo de funções relacionadas a folha de pagamento (para criação e cálculos, por exemplo), além de funções dedicadas à manipulações da lista, como para alocar e liberar memória dinamicamente e de impressão dos dados dos pagamentos.
+
+## Pré-requisitos:
+
+Ter um compilador para linguagem C instalado na máquina. Por exemplo:
+
+### Para Linux:
+    
+- [gcc](https://gcc.gnu.org/) (costuma vir instalado na maioria das distribuições GNU/Linux)
+
+### Para Windows:
+
+- [MinGW](https://sourceforge.net/projects/mingw/)
+
+> *Observação:* </br> Certifique-se de que o compilador está configurado como variável de ambiente no seu SO.
+
+> *Extensões sugeridas para *VScode:** </br> [C/C++ Extension Pack](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools-extension-pack) </br> [C/C++ Compile Run](https://marketplace.visualstudio.com/items?itemName=danielpinto8zz6.c-cpp-compile-run)
