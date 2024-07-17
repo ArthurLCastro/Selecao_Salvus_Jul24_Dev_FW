@@ -3,6 +3,7 @@
 
 
 // --------------- Estruturas ---------------
+
 enum vinculo_empregaticio { 
     clt,
     terceirizacao
@@ -24,21 +25,23 @@ typedef struct FolhaDePagamentoIndividual {
     union dados_empregaticios dados_do_vinculo;
     int qtd_de_contratos;
     float bonus_por_contrato;
-
-    struct FolhaDePagamentoIndividual *proximo_registro;       // Para lista encadeada
-
     float (*func)(struct FolhaDePagamentoIndividual*);
 } FolhaDePagamentoIndividual_t;
 
+typedef struct Item {
+    FolhaDePagamentoIndividual_t folha_individual;
+    struct Item *prox;
+} Item_t;
 
-// --------------- Funcoes para manipular a Lista Encadeada ---------------
-void cadastrar_folha_clt(FolhaDePagamentoIndividual_t *ptr_primeiro_registro, char nome_do_funcionario[], float salario_fixo_mensal, int qtd_de_contratos, float bonus_por_contrato);
-void cadastrar_folha_terceirizado(FolhaDePagamentoIndividual_t *ptr_primeiro_registro, char nome_do_funcionario[], float taxa_por_hora, float horas_trabalhadas, int qtd_de_contratos, float bonus_por_contrato);
 
-float calcular_folha_individual(FolhaDePagamentoIndividual_t* ptr_primeiro_registro);
-void visualizar_folhas(FolhaDePagamentoIndividual_t *ptr_primeiro_registro);
-float calcular_folha_total(FolhaDePagamentoIndividual_t *ptr_primeiro_registro);
+// --------------- Funcoes ---------------
 
-void liberar_memoria(FolhaDePagamentoIndividual_t* ptr_primeiro_registro);
+FolhaDePagamentoIndividual_t criar_folha_individual_clt(char nome_do_funcionario[], float salario_fixo_mensal, int qtd_de_contratos, float bonus_por_contrato);
+FolhaDePagamentoIndividual_t criar_folha_individual_terceirizado(char nome_do_funcionario[], float taxa_por_hora, float horas_trabalhadas, int qtd_de_contratos, float bonus_por_contrato);
+float calcular_folha_individual(FolhaDePagamentoIndividual_t* folha_individual);
+void insere_na_lista(Item_t *head, FolhaDePagamentoIndividual_t folha_individual);
+void imprimir_folhas(Item_t *head);
+float calcular_folha_total(Item_t *head);
+void liberar_memoria(Item_t *head);
 
 #endif
