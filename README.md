@@ -69,3 +69,5 @@ De atenção à manutenção do código, evite código e dados duplicados e redu
 ## Resolução:
 
 O código fonte com a resolução da [Questão Proposta](#questão-proposta) encontra-se em [`/source`](/source/), tendo como arquivo principal [`main.c`](/source/main.c).
+
+A estratégia de resolução utilizada consistiu na implementação de uma estrutura de dados chamada `FolhaDePagamentoIndividual`, que armazena as informações mensais de um funcionário em conjunto com uma outra estrutura, nomeada como `Item`, que equivale a um nó de uma lista encadeada. Foi desenvolvido um grupo de funções relacionadas a folha de pagamento (para criação e cálculos, por exemplo), além de funções dedicadas à manipulações da lista, como para alocar e liberar memória dinamicamente e de impressão dos dados dos pagamentos.

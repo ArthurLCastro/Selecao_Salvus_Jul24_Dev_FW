@@ -75,7 +75,7 @@ void insere_na_lista(Item_t *head, FolhaDePagamentoIndividual_t folha_individual
 void imprimir_folhas(Item_t *head) {
     Item_t *atual = head->prox;
 
-    // Percorrendo toda a lista ate a ultima posicao
+    // Percorrendo toda a lista ate a ultima posicao e imprimindo valores dos itens
     while (atual != NULL){
         printf("\xAF %s:\n", atual->folha_individual.nome_do_funcionario);
 
@@ -116,10 +116,13 @@ float calcular_folha_total(Item_t *head) {
 }
 
 void liberar_memoria(Item_t *head) {
+    // Ponteiro para o inicio da lista
     Item_t *atual = head->prox;
 
+    // Ponteiro para o item a ser liberado
     Item_t *liberado;
 
+    // Percorrendo a lista liberando memoria utilizada por todos os itens
     while (atual != NULL) {
         liberado = atual;
         atual = atual->prox;

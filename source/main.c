@@ -9,12 +9,12 @@
 #include <stdlib.h>
 #include "lib/pagamento.c"
 
-
 // --------------- Macros ---------------
 #define BONUS_FIXO_EM_REAIS     200.00      // Considerando um valor de comissao por contrato igual para todos os funcionarios
 
 // --------------- Funcao principal ---------------
 int main(void) {
+    // Inicializando lista encadeada de itens que conterao a folha individual e um ponteiro para o proximo item
     Item_t head;
     head.prox = NULL;
 
